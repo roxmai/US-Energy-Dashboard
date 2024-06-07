@@ -127,3 +127,76 @@ CDD: "https://www.eia.gov/totalenergy/data/browser/index.php?tbl=T01.11#/?f=M&st
     - Once approved, **do not merge directly to `main`**. Use GitHub's merge functionality to complete the PR: 
 
     - The reviewer or the person responsible for maintaining the repository should merge the PR using GitHub's interface. 
+
+
+### Creating Your Virtual Environment
+
+Create a virtual environment in your workspace. In your virtual environment, you will have greater visibility of installed modules and their versions. This allows you to have better control the module versions, protecting your project from version inconsistencies.
+
+#### Steps to create your virtual enviroment:
+
+Please review [Official Documentation for venv - virtual environments](https://docs.python.org/3/library/venv.html). Our project will make use of venv.
+
+1. **Confirm your working directory**:
+
+    - To confirm working directory, typing "cd" into your terminal will navigate you to your current working directory
+
+2. **Initialize your .venv virtual environment**
+
+    - Create your .venv Virtual Environment by entering the command "python -m venv .venv" into your terminal
+    - This command creates a new folder named '.venv' in your local workspace
+    - If you expand the folder to inspect its contents, you will find installed modules inside the \Lib\ folder
+    - Notice that .venv is included in the .gitignore. This means that is important that your virtual environment has the same name, or if it doesn't, you should add the name of your virtual environment to the .gitignore as a new line
+
+    ```terminal
+    
+    Windows: python -m venv .venv
+    Unix: python3 -m venv .venv
+
+    ```
+
+3. **Install required modules located in requirements.txt**
+
+    - Enter command "pip install -r requirements.txt" into your local terminal
+    - This command will update your .venv Virtual Environment to contain the requirements listed in the requirements.txt file
+    - You should do this everytime you make a new branch to update your .venv Virtual Environment to the latest version of requirements.txt
+    
+    ```terminal
+    
+    Windows: python -m venv .venv
+    Unix: python3 -m venv .venv
+
+    ```
+
+4. **Activate your .venv**
+
+    - Enter command ".venv/Scripts/activate" into your local terminal
+    - This command will activate your Virtual Environment - you should see it activated in your terminal. If you do not see your '(.venv)' as active in your terminal, you may have to try again
+    - You should do this everytime you make a new branch to update your .venv Virtual Environment to the latest version of requirements.txt
+
+    ![screenshot1](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/screenshot_1_venv.png "Activate .venv")
+    
+    ```terminal
+    
+    .venv/Scripts/activate
+
+    ```
+
+5. **Update requirements.txt**
+
+    - Enter the command "pip freeze > requirements.txt" into your local terminal
+    - You will want to do this everytime you install new modules via pip install to ensure all users have the most up to date environment
+
+
+    ```terminal
+    
+    pip freeze > requirements.txt
+
+    ```
+
+
+
+
+
+
+
