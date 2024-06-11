@@ -46,12 +46,33 @@ please check `docs\Rox's_EDA.ipynb`
     - Date Seletion (YYYY OR MM)
 
 
+Goal: To determine the effect of weather on energy consumption in the US.
+
 - **Output**: Summary of all data
-    - Electrical consumption (highest, lowest, average)
-    - Natural gas consumption (highest, lowest, average)
-    - Total energy consumption (highest, lowest, average)
-    - Weather (highest, lowest, average)
-    - plots showing the energy consumption and weather based on inputs.
+    - plot showing the energy consumption and weather data over time
+    - total natural gas / power consumption over entire dataset, all years, all states
+    - DataFrame with added columns: power consumption / natural gas consumption ratio, natural gas equivalent energy consumption, total energy consumption.
+    - average monthly natural gas/power/energy consumption and average degree days for each month.
+    - average monthly natural gas/power/energy consumption and average degree days for each season
+        Winter: Dec Jan Feb
+        Spring: Mar Apr May
+        Summer: Jun Jul Aug
+        Fall: Sep Oct Nov
+
+    Summary of Data for Inputted Values:
+
+        Situation 1: Region + Year
+        - Total power/natural gas/energy consumption for selected region for selected year.
+        - Average monthly consumption over the year in selected region.
+        - graph of energy consumption vs degree days for region for year
+
+        Situation 2: Region + Month
+        - Average monthly power/natural gas/energy consumption for selected state over all years for selected month for selected region.
+        - graph of energy consumption vs degree days for region for month
+
+
+
+
 
 
 
