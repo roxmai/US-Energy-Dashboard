@@ -22,6 +22,36 @@ HDD: "https://www.eia.gov/totalenergy/data/browser/index.php?tbl=T01.10#/?f=M&st
 CDD: "https://www.eia.gov/totalenergy/data/browser/index.php?tbl=T01.11#/?f=M&start=197301&end=202402&charted=32-10"
 
 
+
+### Roadmap
+
+please check `docs\Rox's_EDA.ipynb`
+
+## Next Steps
+
+### What We Need from the User:
+1. **Date Range**: We'll ask for a start and end date to filter the data.
+2. **Location**: The user will specify the state they’re interested in (e.g., ‘California’).
+3. **Metrics**: They’ll choose the type of energy consumption they want to see - options include:
+    - Electrical consumption
+    - Natural gas consumption
+    - Total energy consumption
+
+### Steps:
+1. **Ask for Inputs**: We'll prompt the user to enter the state, start date, end date, and the type of energy consumption. If they input incorrectly, we’ll give them a friendly message to try again.
+2. **Filter the Data**: Use the inputs to get the relevant slice of our dataset.
+3. **Plot the Data**: We'll create a plot using Matplotlib and save it as a PNG file.
+
+### How It Works:
+- **Input Prompts**: Clear and simple instructions for the user to follow:
+    - State name (e.g., 'California')
+    - Start date (YYYY-MM-DD)
+    - End date (YYYY-MM-DD)
+    - Metrics ('electrical', 'natural_gas', or 'total')
+
+- **Output**: A neat plot showing the energy consumption based on their inputs.
+
+
 ### Branching Strategy for Python Group Project 
 
   
