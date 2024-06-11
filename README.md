@@ -30,26 +30,29 @@ please check `docs\Rox's_EDA.ipynb`
 ## Next Steps
 
 ### What We Need from the User:
-1. **Date Range**: We'll ask for a start and end date to filter the data.
-2. **Location**: The user will specify the state they’re interested in (e.g., ‘California’).
-3. **Metrics**: They’ll choose the type of energy consumption they want to see - options include:
-    - Electrical consumption
-    - Natural gas consumption
-    - Total energy consumption
+
+1. **Location**: Region; The user will specify the location they’re interested in (e.g., ‘California’).
+2. **Date Range**: ask for specific year OR month: ask for specific data to filter the data. 
+ 
 
 ### Steps:
-1. **Ask for Inputs**: We'll prompt the user to enter the state, start date, end date, and the type of energy consumption. If they input incorrectly, we’ll give them a friendly message to try again.
+1. **Ask for Inputs**: We'll prompt the user to enter the region and date range. If they input incorrectly, we’ll give them a friendly message to try again.
 2. **Filter the Data**: Use the inputs to get the relevant slice of our dataset.
-3. **Plot the Data**: We'll create a plot using Matplotlib and save it as a PNG file.
+3. **Plot the Data**: create a plot using Matplotlib and save it as a PNG file.
 
 ### How It Works:
 - **Input Prompts**: Clear and simple instructions for the user to follow:
-    - State name (e.g., 'California')
-    - Start date (YYYY-MM-DD)
-    - End date (YYYY-MM-DD)
-    - Metrics ('electrical', 'natural_gas', or 'total')
+    - State/Region name (e.g., 'California')
+    - Date Seletion (YYYY OR MM)
 
-- **Output**: A neat plot showing the energy consumption based on their inputs.
+
+- **Output**: Summary of all data
+    - Electrical consumption (highest, lowest, average)
+    - Natural gas consumption (highest, lowest, average)
+    - Total energy consumption (highest, lowest, average)
+    - Weather (highest, lowest, average)
+    - plots showing the energy consumption and weather based on inputs.
+
 
 
 ### Branching Strategy for Python Group Project 
