@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import regex
 from datetime import datetime as date
 
 
@@ -32,5 +33,21 @@ df_EConsumption['Date'] = df_EConsumption['Date'].apply(lambda x: date.strptime(
 # print(df_EConsumption.head(10))
 # print(df_NGConsumption.head(10))
 
-print(dfCDD)
+dfCDD['Description'] = dfCDD['Description'].apply(lambda x: str.replace(x, 'Cooling Degree-Days, ', ''))
+dfCDD['Year'] = dfCDD['YYYYMM'].apply(lambda x: str(x)).str.slice(0,4).apply(lambda x: int(x))
+dfCDD['Month'] = dfCDD['YYYYMM'].apply(lambda x: str(x)).str.slice(4,6).apply(lambda x: int(x))
+dfCDD = dfCDD[dfCDD['Month']<=12]
+dfCDD = dfCDD.reindex(columns=['Description', 'Year', 'Month', 'Value']).rename(columns = {'Description': 'Region'})
+dfCDD['Degree Day'] = 'Cooling'
+
+
+dfHDD['Description'] = dfHDD['Description'].apply(lambda x: str.replace(x, 'Heating Degree-Days, ', ''))
+dfHDD['Year'] = dfHDD['YYYYMM'].apply(lambda x: str(x)).str.slice(0,4).apply(lambda x: int(x))
+dfHDD['Month'] = dfHDD['YYYYMM'].apply(lambda x: str(x)).str.slice(4,6).apply(lambda x: int(x))
+dfHDD = dfHDD[dfHDD['Month']<=12]
+dfHDD = dfHDD.reindex(columns=['Description', 'Year', 'Month', 'Value']).rename(columns = {'Description': 'Region'})
+dfHDD['Degree Day'] = 'Heating'
+
+
+
 
