@@ -18,9 +18,40 @@ def main():
         print("Invalid region. Please restart the program and select a valid region.")
         return
 
-    # Ask user for date input
-    year_input = input("Do you want to analyze a specific year or a range")
+    # Ask user for year input
+    year_input = input("Do you want to analyze a specific year or a range (e.g. 'specific', 'range'): ")
 
+    if year_input == 'specific':
+        year = int(input('Enter the year you want to analyze: '))
+        df = df[df.index.get_level_values('Year') == year]
+    elif year_input == 'range':
+        start_year = int(input('Enter the start year of the range: '))
+        end_year = int(input('Enter the end year of the range: '))
+        df = df[(df.index.get_level_values('Year') >= start_year) & (df.index.get_level_values('Year') <= end_year)]
+    else:
+        print('Invalid input. Please restart the program and enter either "specific" or "range".')
+        return
+    
+    # Ask user for the month input
+    analysis_type = input("Would you like to analyze the entire duration, a specific month, or a season? Enter 'duration', 'month', or 'season': ").strip().lower()
+
+    if analysis_type == 'month':
+        month = int(input('Enter the month (1-12) you want to analyze: '))
+        df = df[df.index.get_level_values('Month') == month]
+    elif analysis_type == 'season':
+        season = int(input("Enter the season you want to analyze (Winter = 1, Spring = 2, Summer = 3, Autumn = 4): "))
+        if season == 1:
+            df = df[df.index.get_level_values('Month').isin([12, 1, 2])]
+        elif season == 2:
+            df = df[df.index.get_level_values('Month').isin([3, 4, 5])]
+        elif season == 3:
+            df = df[df.index.get_level_values('Month').isin([6, 7, 8])]
+        elif season == 4:
+            df = df[df.index.get_level_values('Month').isin([9, 10, 11])]
+        else:
+            print('Invalid quarter. Please restart the program and enter 1 to 4 for a season .')
+            return
+        
     # Perform analysis based on user inputs
 
     # Plot energy comsumption data
