@@ -22,7 +22,7 @@ def main():
     year_input = input("Do you want to analyze a specific year or a range (e.g. 'specific', 'range'): ")
 
     if year_input == 'specific':
-        year = int(input('Enter the year you want to analyze: '))
+        year = int(input('Enter the year you want to analyze from 2001 to 2021 (e.g. '2003'): '))
         df = df[df.index.get_level_values('Year') == year]
     elif year_input == 'range':
         start_year = int(input('Enter the start year of the range: '))
