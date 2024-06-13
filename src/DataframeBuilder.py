@@ -69,6 +69,6 @@ def build_data_frame():
     df['DD'] = df['HDD'] - df['CDD'] #create new column with total degree days (energy used for heating is positive)
     df = df.set_index(['Region', 'State', 'Year', 'Month'])
 
-    print(df.head(10))
-    print(df.describe())
+    # print(df.head(10))
+    # print(df.describe())
     return df
