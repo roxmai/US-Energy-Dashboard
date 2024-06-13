@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from DataframeBuilder import df
+from src.DataframeBuilder import df
 
 print(df.describe())
 
