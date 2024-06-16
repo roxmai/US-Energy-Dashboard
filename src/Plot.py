@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+import os
 
 def plot_energy_consumption(df):
     '''
@@ -9,6 +10,10 @@ def plot_energy_consumption(df):
     df (DataFrame): The dataframe to plot.
     '''
     df = df.reset_index()
+
+    # Ensure the output directory exists
+    output_dir = 'plot_output'
+    os.makedirs(output_dir, exist_ok=True)
 
     # Plot Natural Gas Consumption
     plt.figure(figsize=(12, 6))
@@ -22,7 +27,7 @@ def plot_energy_consumption(df):
     plt.ylabel('Natural Gas Consumption (MMcf)')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
-    plt.savefig('natural_gas_consumption.png')
+    plt.savefig(os.path.join(output_dir, 'natural_gas_consumption.png'))
     plt.close()
 
     # Plot Electrical Consumption
@@ -37,7 +42,7 @@ def plot_energy_consumption(df):
     plt.ylabel('Electrical Consumption (million kWh)')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
-    plt.savefig('electrical_consumption.png')
+    plt.savefig(os.path.join(output_dir, 'electrical_consumption.png'))
     plt.close()
 
     # Plot Total Energy Consumption
@@ -52,7 +57,7 @@ def plot_energy_consumption(df):
     plt.ylabel('Total Energy Consumption (million kWh)')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
-    plt.savefig('total_energy_consumption.png')
+    plt.savefig(os.path.join(output_dir, 'total_energy_consumption.png'))
     plt.close()
 
     # Plot Heating Degree Days (HDD)
@@ -67,5 +72,5 @@ def plot_energy_consumption(df):
     plt.ylabel('HDD')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
-    plt.savefig('hdd_over_time.png')
+    plt.savefig(os.path.join(output_dir, 'hdd_over_time.png'))
     plt.close()

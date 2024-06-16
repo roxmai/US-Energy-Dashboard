@@ -46,8 +46,13 @@ def main():
         print(f"Total energy consumption: {total_energy_consumption:.2f} million kWh")
 
         # Average monthly energy consumption
-        average_monthly_consumption = df_year['Total Energy Consumption (million kWh)'].mean()
-        print(f"Average monthly energy consumption: {average_monthly_consumption:.2f} million kWh")
+        average_monthly_power = df_year['Electrical Consumption (million kWh)'].mean()
+        average_monthly_natural_gas = df_year['Natural Gas Energy Consumption (million kWh)'].mean()
+        average_monthly_energy = df_year['Total Energy Consumption (million kWh)'].mean()
+
+        print(f"Average monthly power consumption: {average_monthly_power:.2f} million kWh")
+        print(f"Average monthly natural gas consumption: {average_monthly_natural_gas:.2f} million kWh")
+        print(f"Average monthly energy consumption: {average_monthly_energy:.2f} million kWh")
 
         # Plot energy consumption vs degree days
         plot_energy_consumption(df_year)
@@ -69,14 +74,15 @@ def main():
                 print('No data available for the selected month. Please restart the program and select a valid month.')
                 return
 
+            # Average monthly consumption statistics
             average_power = df_month['Electrical Consumption (million kWh)'].mean()
             average_natural_gas = df_month['Natural Gas Energy Consumption (million kWh)'].mean()
             average_energy = df_month['Total Energy Consumption (million kWh)'].mean()
 
             print(f"\nFor the region {region_input} from year {year_start} to {year_end}, month {month}:")
-            print(f"Average power consumption: {average_power:.2f} million kWh")
-            print(f"Average natural gas consumption: {average_natural_gas:.2f} million kWh")
-            print(f"Average energy consumption: {average_energy:.2f} million kWh")
+            print(f"Average monthly power consumption: {average_power:.2f} million kWh")
+            print(f"Average monthly natural gas consumption: {average_natural_gas:.2f} million kWh")
+            print(f"Average monthly energy consumption: {average_energy:.2f} million kWh")
 
             # Plot energy consumption vs degree days
             plot_energy_consumption(df_month)
@@ -94,14 +100,15 @@ def main():
                 print('No data available for the selected season. Please restart the program and select a valid season.')
                 return
 
+            # Average seasonal consumption statistics
             average_power = df_season['Electrical Consumption (million kWh)'].mean()
             average_natural_gas = df_season['Natural Gas Energy Consumption (million kWh)'].mean()
             average_energy = df_season['Total Energy Consumption (million kWh)'].mean()
 
             print(f"\nFor the region {region_input} from year {year_start} to {year_end}, season {season}:")
-            print(f"Average power consumption: {average_power:.2f} million kWh")
-            print(f"Average natural gas consumption: {average_natural_gas:.2f} million kWh")
-            print(f"Average energy consumption: {average_energy:.2f} million kWh")
+            print(f"Average seasonal power consumption: {average_power:.2f} million kWh")
+            print(f"Average seasonal natural gas consumption: {average_natural_gas:.2f} million kWh")
+            print(f"Average seasonal energy consumption: {average_energy:.2f} million kWh")
 
             # Plot energy consumption vs degree days
             plot_energy_consumption(df_season)
@@ -116,3 +123,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
