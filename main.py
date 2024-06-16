@@ -1,5 +1,6 @@
 from src.DataframeBuilder import build_data_frame
 from src.analysis import analyze_data
+from src.Plot import plot_energy_consumption
 import numpy as np
 import pandas as pd
 
@@ -22,7 +23,7 @@ def main():
     year_input = input("Do you want to analyze a specific year or a range (e.g. 'specific', 'range'): ")
 
     if year_input == 'specific':
-        year = int(input('Enter the year you want to analyze from 2001 to 2021 (e.g. '2003'): '))
+        year = int(input("Enter the year you want to analyze from 2001 to 2021 (e.g. '2003'): "))
         df = df[df.index.get_level_values('Year') == year]
     elif year_input == 'range':
         start_year = int(input('Enter the start year of the range: '))
@@ -53,8 +54,10 @@ def main():
             return
         
     # Perform analysis based on user inputs
+    df_enhanced = analyze_data(df)
 
     # Plot energy comsumption data
+    plot_energy_consumption(df)
 
 if __name__ == '__main__':
     main()
