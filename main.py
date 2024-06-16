@@ -29,7 +29,7 @@ def main():
     time_frame = input("Would you like to analyze 'yearly' or 'monthly': ").strip().lower()
 
     if time_frame == 'yearly':
-        year = int(input("Enter the year you want to analyze from 2001 to 2021: "))
+        year = int(input("Enter the year you want to analyze from 2001 to 2024 (e.g. 2003): "))
         df_year = df[df.index.get_level_values('Year') == year]
         if df_year.empty:
             print('No data available for the selected year. Please restart the program and select a valid year.')
@@ -58,8 +58,8 @@ def main():
         plot_energy_consumption(df_year)
 
     elif time_frame == 'monthly':
-        year_start = int(input("Enter the start year you want to analyze from 2001 to 2021: "))
-        year_end = int(input("Enter the end year you want to analyze from 2001 to 2021: "))
+        year_start = int(input("Enter the start year you want to analyze from 2001 to 2024 (e.g. 2003): "))
+        year_end = int(input("Enter the end year you want to analyze from 2001 to 2024 (e.g. 2003): "))
         df_years = df[(df.index.get_level_values('Year') >= year_start) & (df.index.get_level_values('Year') <= year_end)]
         if df_years.empty:
             print('No data available for the selected years. Please restart the program and select a valid range.')
