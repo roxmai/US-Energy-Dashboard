@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 from DataframeBuilder import df
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 
 print(df.describe())
 
@@ -10,8 +12,43 @@ print('******** Natural Gas, Electricity, Total Energy Consumption, Degree Days 
 natural_gas_energy_density = 0.303634232 # million kWh per 1 MMcf, from EIA conversion calculator. assuming natural gas is in standard volume
 df['Natural Gas Energy Consumption (million kWh)'] = df['Natural Gas Consumption (MMcf)']*natural_gas_energy_density 
 df['Total Energy Consumption (million kWh)'] = df['Natural Gas Energy Consumption (million kWh)']+df['Electrical Consumption (million kWh)']
-df['Electrical/Natural Gas Consumption Ratio'] = df['Electrical Consumption (million kWh)']/df['Natural Gas Energy Consumption (million kWh)']
-print(df.head(5))
+df['Electrical/Natural Gas Consumption Ratio'] = df['Electrical Consumption (million kWh)'] / df['Natural Gas Energy Consumption (million kWh)']
+print(df)
+
+# ******
+new_df = df.pivot_table("Natural Gas Consumption (MMcf)", index=["Month"], columns=["Year"])
+
+df["DateTime"] = df.index.get_level_values('Year').astype(str) + '-' + df.index.get_level_values('Month').astype(str)
+df["DateTime"] = pd.to_datetime(df["DateTime"], format="%Y-%m")
+
+total_energy_df = df.pivot_table("Total Energy Consumption (million kWh)", index=["DateTime"])
+elec_consumption_df = df.pivot_table('Electrical Consumption (million kWh)', index = ['DateTime'])
+natural_gas_energy_df = df.pivot_table('Natural Gas Energy Consumption (million kWh)', index = ['DateTime'])
+dd_df = df.pivot_table('DD', index = ['DateTime'])
+df_year = df.pivot_table("Total Energy Consumption (million kWh)", index = 'Month', columns = 'Year')
+
+plt.figure()
+plt.plot(total_energy_df)
+# plt.plot(dd_df)
+
+dd_plot = plt.subplot()
+dd_plot.set_title('Degree Days Over Time')
+dd_plot.set(xlabel = 'Date', ylabel = 'Degree Days')
+
+elec_consumption = plt.subplot()
+elec_consumption.set_title('Energy Consumption Over Time')
+elec_consumption.plot(elec_consumption_df)
+
+elec_consumption.set(xlabel = 'Date', ylabel = 'Energy Consumption (million kWh/month)') 
+
+ng_energy_consumption = plt.subplot()
+ng_energy_consumption.plot(natural_gas_energy_df)
+
+elec_consumption.legend(['Monthly Total Energy Consumption (million kWh)', 'Monthly Electrical Consumption (million kWh)', 'Monthly Natural Gas Energy Consumption (million kWh)'])
+
+plt.show()
+
+# ****
 
 # Total Consumption Over all years
 print('\n'*2)
@@ -42,3 +79,5 @@ summer_averages = grouped_months_df.loc[[6,7,8]].mean()
 fall_averages = grouped_months_df.loc[[9,10,11]].mean()
 seasonal_averages = pd.DataFrame({'Winter': winter_averages, 'Spring':spring_averages, 'Summer': summer_averages, 'Fall': fall_averages}).transpose()
 print(seasonal_averages)
+
+
