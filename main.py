@@ -85,8 +85,8 @@ def main():
             print(f"Average monthly natural gas consumption: {average_natural_gas:.2f} million kWh")
             print(f"Average monthly energy consumption: {average_energy:.2f} million kWh")
 
-            # Plot energy consumption vs degree days
-            plot_energy_consumption(df_month)
+            # Plot energy consumption vs degree days (Scatter Plot for 'monthly')
+            plot_energy_consumption(df_month, plot_type='scatter')
 
         elif season_or_month == 'season':
             season = input("Enter the season (Winter, Spring, Summer, Autumn) you want to analyze: ").strip().capitalize()
@@ -124,4 +124,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
