@@ -66,17 +66,18 @@ def plot_energy_consumption(df):
     plt.savefig(os.path.join(output_dir, 'total_energy_consumption.png'))
     plt.close()
 
-    # Plot Heating Degree Days (HDD)
+    # Plot Absolute Degree Days (DD)
     plt.figure(figsize=(12, 6))
     for region in df['Region'].unique():
         region_data = df[df['Region'] == region]
         region_data['Date'] = pd.to_datetime(region_data.assign(day=1)[['Year', 'Month', 'day']])
-        plt.plot(region_data['Date'], region_data['HDD'], label=region, alpha=0.7)
+        region_data['absolute_DD'] = region_data['DD'].abs()
+        plt.plot(region_data['Date'], region_data['absolute_DD'], label=region, alpha=0.7)
 
-    plt.title('Heating Degree Days (HDD) Over Time by Region')
+    plt.title('Absolute Degree Days (DD) Over Time by Region')
     plt.xlabel('Date')
-    plt.ylabel('HDD')
+    plt.ylabel('Degree Days (DD)')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, 'hdd_over_time.png'))
+    plt.savefig(os.path.join(output_dir, 'absolute_degree_days.png'))
     plt.close()
