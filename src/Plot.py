@@ -1,10 +1,12 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 import os
+from datetime import datetime
 
 def plot_energy_consumption(df):
     '''
-    Plots the Total Energy Consumption, Natural Gas Consumption, and Electrical Consumption over time.
+    Plots the Total Energy Consumption, Natural Gas Consumption, 
+    and Electrical Consumption over time.
 
     Parameters:
     df (DataFrame): The dataframe to plot.
@@ -23,11 +25,11 @@ def plot_energy_consumption(df):
     plt.figure(figsize=(12, 6))
     for region in df['Region'].unique():
         region_data = df[df['Region'] == region]
-        plt.plot(region_data['Year'] + region_data['Month']/12, 
-                    region_data['Natural Gas Consumption (MMcf)'], label=region, alpha=0.7)
+        region_data['Date'] = pd.to_datetime(region_data.assign(day=1)[['Year', 'Month', 'day']])
+        plt.plot(region_data['Date'], region_data['Natural Gas Consumption (MMcf)'], label=region, alpha=0.7)
 
     plt.title('Natural Gas Consumption Over Time by Region')
-    plt.xlabel('Year')
+    plt.xlabel('Date')
     plt.ylabel('Natural Gas Consumption (MMcf)')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
@@ -38,11 +40,11 @@ def plot_energy_consumption(df):
     plt.figure(figsize=(12, 6))
     for region in df['Region'].unique():
         region_data = df[df['Region'] == region]
-        plt.plot(region_data['Year'] + region_data['Month']/12, 
-                 region_data['Electrical Consumption (million kWh)'], label=region, alpha=0.7)
+        region_data['Date'] = pd.to_datetime(region_data.assign(day=1)[['Year', 'Month', 'day']])
+        plt.plot(region_data['Date'], region_data['Electrical Consumption (million kWh)'], label=region, alpha=0.7)
 
     plt.title('Electrical Consumption Over Time by Region')
-    plt.xlabel('Year')
+    plt.xlabel('Date')
     plt.ylabel('Electrical Consumption (million kWh)')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
@@ -53,11 +55,11 @@ def plot_energy_consumption(df):
     plt.figure(figsize=(12, 6))
     for region in df['Region'].unique():
         region_data = df[df['Region'] == region]
-        plt.plot(region_data['Year'] + region_data['Month']/12, 
-                 region_data['Total Energy Consumption (million kWh)'], label=region, alpha=0.7)
+        region_data['Date'] = pd.to_datetime(region_data.assign(day=1)[['Year', 'Month', 'day']])
+        plt.plot(region_data['Date'], region_data['Total Energy Consumption (million kWh)'], label=region, alpha=0.7)
 
     plt.title('Total Energy Consumption Over Time by Region')
-    plt.xlabel('Year')
+    plt.xlabel('Date')
     plt.ylabel('Total Energy Consumption (million kWh)')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
@@ -68,11 +70,11 @@ def plot_energy_consumption(df):
     plt.figure(figsize=(12, 6))
     for region in df['Region'].unique():
         region_data = df[df['Region'] == region]
-        plt.plot(region_data['Year'] + region_data['Month']/12, 
-                    region_data['HDD'], label=region, alpha=0.7)
+        region_data['Date'] = pd.to_datetime(region_data.assign(day=1)[['Year', 'Month', 'day']])
+        plt.plot(region_data['Date'], region_data['HDD'], label=region, alpha=0.7)
 
     plt.title('Heating Degree Days (HDD) Over Time by Region')
-    plt.xlabel('Year')
+    plt.xlabel('Date')
     plt.ylabel('HDD')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
