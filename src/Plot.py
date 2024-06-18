@@ -9,7 +9,11 @@ def plot_energy_consumption(df):
     Parameters:
     df (DataFrame): The dataframe to plot.
     '''
-    df = df.reset_index()
+    
+    # Aggregate data at the region level
+    columns_to_exclude = ['DateTime']  # Specify columns to exclude from the sum operation
+    columns_to_sum = [col for col in df.columns if col not in columns_to_exclude + ['Region', 'Year', 'Month']]  
+    df = df.groupby(['Region', 'Year', 'Month'])[columns_to_sum].sum().reset_index()
 
     # Ensure the output directory exists
     output_dir = 'plot_output'
