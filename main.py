@@ -16,7 +16,8 @@ def main():
     print('\nGeneral Statistics and Analysis Done.\n')
 
     # Ask user for region input
-    region_input = input("Enter region you want to analyze? (e.g., 'New England', 'Middle Atlantic', etc.): ").strip()
+    print("Data available regions: East North Central, East South Central, Middle Atlantic, Mountain, New England, Pacific, South Atlantic, West North Central, West South Central")
+    region_input = input("Enter region you want to analyze? (e.g., 'New England'): ").strip()
 
     # Filter the dataframe by the selected region
     available_regions = df.index.get_level_values('Region').unique()
