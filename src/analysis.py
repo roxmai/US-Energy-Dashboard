@@ -7,8 +7,8 @@ def analyze_data(df):
     print(df.describe())
 
     # Adding Total Energy Consumption, Natural Gas Energy Consumption, and Electrical/Natural Gas Ratio column
-    natural_gas_energy_density = 0.303634232 # million kWh per 1 MMcf, from EIA conversion calculator. assuming natural gas is in standard volume
-    df['Natural Gas Energy Consumption (million kWh)'] = df['Natural Gas Consumption (MMcf)']*natural_gas_energy_density 
+    NATURAL_GAS_ENERGY_DENSITY = 0.303634232 # million kWh per 1 MMcf, from EIA conversion calculator. assuming natural gas is in standard volume
+    df['Natural Gas Energy Consumption (million kWh)'] = df['Natural Gas Consumption (MMcf)']*NATURAL_GAS_ENERGY_DENSITY 
     df['Total Energy Consumption (million kWh)'] = df['Natural Gas Energy Consumption (million kWh)']+df['Electrical Consumption (million kWh)']
     df['Electrical/Natural Gas Consumption Ratio'] = df['Electrical Consumption (million kWh)'] / df['Natural Gas Energy Consumption (million kWh)']
     print(df)
