@@ -1,9 +1,13 @@
 import numpy as np
 import pandas as pd
 import matplotlib.dates as mdates
+import matplotlib.pyplot as plt
+import os
 # New function adding features
 
 def analyze_data(df):
+    output_dir = 'plot_output'
+    os.makedirs(output_dir, exist_ok=True)
     print(df.describe())
 
     # Adding Total Energy Consumption, Natural Gas Energy Consumption, and Electrical/Natural Gas Ratio column
@@ -44,6 +48,45 @@ def analyze_data(df):
     grouped_months_degree_days_df = df.groupby('Month')['DD'].mean()
     grouped_months_df = pd.DataFrame({'Natural Gas Consumption (MMcf)':grouped_months_natural_gas_df, 'Electrical Consumption (million kWh)':grouped_months_electricity_df, 'Total Energy Consumption (million kWh)': grouped_months_total_energy_df, 'Degree Days': grouped_months_degree_days_df})
     print(grouped_months_df)
+
+    # # Pivot table, grouped by datetime
+    # grouped_datetime_df = df.pivot_table(index = 'DateTime', aggfunc={'Total Energy Consumption (million kWh)':'mean', 'DD':'mean'})
+
+    # # Consumption vs Degree Days
+
+    # plt.scatter(x=grouped_datetime_df['DD'], y=grouped_datetime_df['Total Energy Consumption (million kWh)'], s = 2)
+    # plt.title('Monthly Energy Consumption vs. Degree Days')
+    # plt.xlabel('Degree Days')
+    # plt.ylabel('Energy Consumption (million kWh)')
+    # plt.tight_layout()
+    # plt.savefig(os.path.join(output_dir, 'consumption_vs_ddays.png'))
+    # plt.close()
+
+    # # Energy Consumption Over Time
+    # plt.figure()
+    # plt.plot(total_energy_df)
+    # plt.xlabel('Date')
+    # plt.ylabel('Energy Consumption (million kWh)')
+
+    # elec_consumption = plt.subplot()
+    # elec_consumption.plot(elec_consumption_df)
+
+    # ng_energy_consumption = plt.subplot()
+    # ng_energy_consumption.plot(natural_gas_energy_df)
+
+    # plt.legend(['Monthly Total Energy Consumption (million kWh)', 'Monthly Electrical Consumption (million kWh)', 'Monthly Natural Gas Energy Consumption (million kWh)'])
+    # plt.tight_layout()
+    # plt.savefig(os.path.join(output_dir, 'energy_consumption_over_time.png'))
+    # plt.close()
+
+    # # Degree Days Over Time
+    # plt.plot(dd_df)
+    # plt.title('Degree Days Over Time')
+    # plt.xlabel('Date')
+    # plt.ylabel('Degree Days')
+    # plt.tight_layout()
+    # plt.savefig(os.path.join(output_dir, 'degree_days_over_time.png'))
+    # plt.close()
 
     # Average Monthly Consumption by Season
     print('\n' * 2)

@@ -1,5 +1,5 @@
 from src.DataframeBuilder import build_data_frame
-from src.Analysis import analyze_data
+from src.analysis import analyze_data
 from src.Plot import plot_energy_consumption # Importing the plot function
 import numpy as np
 import pandas as pd
