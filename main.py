@@ -6,13 +6,16 @@ import pandas as pd
 
 
 def main():
-  
+    '''
+    Main function to run the data analysis and user interaction.
+    It builds the dataframe, performs an analysis, prompts the user for input, and provides data insights.
+    '''
     try:
-        # build the dataframe using the provided function
+        # Build the dataframe using the provided function
         df = build_data_frame()
 
         # Analyze data
-        df = analyze_data(df)  # Calling the function before getting analytics
+        df = analyze_data(df)  # Calling the function to perform initial data analysis and feature engineering
 
         # General Data Analysis has been done. Now moving to specific analysis.
         print('\nGeneral Statistics and Analysis Done.\n')
