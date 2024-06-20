@@ -15,7 +15,7 @@ Energy data was retrieved from the US Department of Energy. Due to the limited s
 
 ![Natural Gas Consumption Data](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/screenshots/screenshot_2_natgasconsumption.png "EIA Natural Gas Consumption Data")
 
-**Data Handling: Natural Gas Consumption**
+**Data Handling: Natural Gas Consumption**<br>
 Please refer to "DataframeBuilder.py" for the data handling code. In order to wrangle the natural gas consumption data into the desired format, string cleaning was first performed on the column names to extract the state names. The data was then converted to long format by applying a melt function. Extraneous data had to be removed by applying a mask, filtering out total US consumption and The District of Columbia (not technically a state). Following this, a dictionary containing {'US Census Region': 'State'} data was mapped to the 'States' column. Lastly, using a string index slice, the month and year were extracted into their respective columns from the 'Date' column, which originally had the format of 'Jan-2001', for example.
 
 ```
@@ -38,7 +38,7 @@ df_NGConsumption = df_NGConsumption.reindex(columns=['Region', 'State', 'Year', 
 
 ![Electricity Consumption Data](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/screenshots/screenshot_3_electricityconsumption.png "EIA Electricity Consumption Data")
 
-**Data Handling: Electricity Consumption**
+**Data Handling: Electricity Consumption**<br>
 In order to wrangle the electricity consumption data into the desired format, the 'description' column was filtered using a mask to find all instances of a string that contains 'all sectors' in the string. This was done because the data table contains electricity consumption data to multiple sectors, where we are only interested in all sectors. After applying the mask, cleaning was performed on the 'description', column using str.replace to extract the State name. The pd.melt function was then utilized to convert the data into long format. The region dictionary was mapped to the data in order to match Census regions to States. The same str.slice method was then used to extract the 'Year' and 'Month' from the 'Date' column. 
 Finally, the column name for 'description' was changed to 'State' and then reindexed to the correct order to prepare for merging.
 
@@ -73,7 +73,7 @@ A screenshot of the HDD weather data can be found below. Note, that CDD data was
 
 ![HDD Weather Data](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/screenshots/screenshot_4_HDD.png "HDD Weather Data")
 
-**Data Handling: Degree Day Consumption**
+**Data Handling: Degree Day Consumption**<br>
 To wrangle the degree day data, the 'Description' column was cleaned to extract the State from the column. Using the str.slice function, is used to extract the month and year from the 'YYYYMM' column. The columns are the reindexed and the a mask is aplied to remove the aggregated data from the 'Region' column.
 
 ```
@@ -104,7 +104,7 @@ df = df.set_index(['Region', 'State', 'Year', 'Month'])
 
 Please refer to main.py for the code that manages user inputs and outputs, as well as the overall implementation of the tool. 
 
-**INPUT/OUTPUT Process Flow Diagram**
+**INPUT/OUTPUT Process Flow Diagram**<br>
 ![Input/Output Diagram](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/screenshots/screenshot_5_inputoutput.png "Input/Output Diagram")
 
 The above diagram contains the process flow for user inputs and program outputs for the analytics tool. Upon initial execution, the program outputs general aggregated statistics for the Contiguous United States. This includes:
@@ -116,9 +116,89 @@ Following the display of these general statistics, user input is requested for s
 
 ## ANALYTICS
 
+### Introduction - Analysis
+In the analysis portion of our program, we have opted to generate the following statistics for output: <br>
+- General aggregated statistics for the dataframe using pd.describe()
+- Total Energy Consumption (million kWh)
+- Average Monthly Consumption and Degree Days by Month
+- Average Monthly Consumption and Degree Days by Season
 
-### CODE IMPLEMENTATION CHECKLIST
-TODO: ADD SECTION ON HOW ANALYSIS WAS IMPLEMENTED, MATPLOTLIB, WHY CERTAIN ANALYTICS ARE PROVIDED AND WHY IT IS REASONABLE TO DO IT THAT WAY
+Although many other statistical summaries can be provided to the user, we felt that this general summary would provide the most useful information to the user. Before completing our analysis, it was already clear that weather was highly correlated with energy consumption. To complete our project requirements - instead of selecting datasets where the relationship between the data was unclear, we have opted to select data that is highly correlated because it would create a clear path forward for further development. Due to the limited scope of the project, as well as the limited time and resources, it was unreasonable to expand the development of this tool to include regressional models, as well as predictive modeling. However, this is something that our team has discussed and outlined the opportunities for further development. <br>
+
+
+### Analysis Implementation
+On each execution of our program (main.py), we have provided a set of general, aggregated statistics for our dataset. The first information displayed to the user applies the pd.describe() function to the master dataframe which generates a general set of aggregated statistics for the dataset. Although not providing the user with much specialized information, it gives a good sample of the data included in the dataset, to give the user an idea of what exists. <br>
+
+Following this information, another dataframe is printed to the output. This dataframe contains the 'Total Energy Consumption (million kWh)' column. This column was generated by taking the product of the 'Natural Gas Consumption (MMcf)' column and the natural gas energy density. This natural gas energy density value was retrieved from the EIA, and allows us to convert a volume of natural gas into an energy equivalent. After doing this, the 'Total Energy Consumption (million kWh)' can be generated by taking the sum of 'Natural Gas Energy Consumption (million kWh)' and 'Electrical Consumption (million kWh)'. <br>
+
+```
+# From Analysis.py file
+# lines 10-14
+
+natural_gas_energy_density = 0.303634232 # million kWh per 1 MMcf, from EIA conversion calculator. assuming natural gas is in standard volume
+df['Natural Gas Energy Consumption (million kWh)'] = df['Natural Gas Consumption (MMcf)']*natural_gas_energy_density 
+df['Total Energy Consumption (million kWh)'] = df['Natural Gas Energy Consumption (million kWh)']+df['Electrical Consumption (million kWh)']
+df['Electrical/Natural Gas Consumption Ratio'] = df['Electrical Consumption (million kWh)'] / df['Natural Gas Energy Consumption (million kWh)']
+print(df)
+```
+
+In the next step of the analysis, the pd.pivot_table() function is used to obtain aggregate values for the total natural gas consumption over the time range in our dataset. Using this pivot table, we are able to generate and print the aggregate values for total consumption.
+
+```
+# From Analysis.py file
+# lines 17-26
+
+new_df = df.pivot_table("Natural Gas Consumption (MMcf)", index=["Month"], columns=["Year"])
+
+df["DateTime"] = df.index.get_level_values('Year').astype(str) + '-' + df.index.get_level_values('Month').astype(str)
+df["DateTime"] = pd.to_datetime(df["DateTime"], format="%Y-%m")
+
+total_energy_df = df.pivot_table("Total Energy Consumption (million kWh)", index=["DateTime"])
+elec_consumption_df = df.pivot_table('Electrical Consumption (million kWh)', index = ['DateTime'])
+natural_gas_energy_df = df.pivot_table('Natural Gas Energy Consumption (million kWh)', index = ['DateTime'])
+dd_df = df.pivot_table('DD', index = ['DateTime'])
+df_year = df.pivot_table("Total Energy Consumption (million kWh)", index = 'Month', columns = 'Year')
+```
+
+The next part of the analysis consisted of printing the 'Average Monthly Consumption and Degree Days by Month' and the 'Average Monthly Consumption and Degree Days by Season'. This is done by using the pd.group_by() function.
+
+```
+# From Analysis.py file
+# lines 38-56
+
+# Average Monthly Consumption by Month
+print('\n'*2)
+print('******** Average Monthly Consumption and Degree Days by Month ********')
+grouped_months_natural_gas_df = df.groupby('Month')['Natural Gas Consumption (MMcf)'].mean()
+grouped_months_electricity_df = df.groupby('Month')['Electrical Consumption (million kWh)'].mean()
+grouped_months_total_energy_df = df.groupby('Month')['Total Energy Consumption (million kWh)'].mean()
+grouped_months_degree_days_df = df.groupby('Month')['DD'].mean()
+grouped_months_df = pd.DataFrame({'Natural Gas Consumption (MMcf)':grouped_months_natural_gas_df, 'Electrical Consumption (million kWh)':grouped_months_electricity_df, 'Total Energy Consumption (million kWh)': grouped_months_total_energy_df, 'Degree Days': grouped_months_degree_days_df})
+print(grouped_months_df)
+
+# Average Monthly Consumption by Season
+print('\n' * 2)
+print('******** Average Monthly Consumption and Degree Days by Season ********')
+winter_averages = grouped_months_df.loc[[12, 1, 2]].mean()
+spring_averages = grouped_months_df.loc[[3, 4, 5]].mean()
+summer_averages = grouped_months_df.loc[[6, 7, 8]].mean()
+fall_averages = grouped_months_df.loc[[9, 10, 11]].mean()
+seasonal_averages = pd.DataFrame({'Winter': winter_averages, 'Spring': spring_averages, 'Summer': summer_averages, 'Fall': fall_averages}).transpose()
+print(seasonal_averages)
+```
+
+After the general analytics are generated, the input/output portion of the Main.py file is executed.
+
+### Data Visualization and Plots
+TODO: Add verbiage on this data
+
+### Future Analytics
+
+As mentioned previously in the Introduction - Analytics section of this report, further analytics can be completed, but were not done in this implementation. <br>
+
+One very useful application would be to complete a seasonal time series analysis on a training set of the data. This regression could be done on the entire Contiguous United States. However, the best use case for this would be to create models for each 'State' or 'Region'. This model would ideally be trained on day of the year, and degree day. This would allow for us to implement the model and feed it with a weather forecast for days ahead to generate a forecasted demand for each region or state. <br>
+
+More functionality could also be added to the tool in order to create comparisons between the demand profile of different states. Also, demand from other sources of energy could be integrated into this model in order to create a more robust and inclusive analytics tool for energy demand in the Contiguous United States.
 
 
 
