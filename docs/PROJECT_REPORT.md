@@ -194,15 +194,15 @@ After the general analytics are generated, the input/output portion of the Main.
 To visualize the data, several plots are generated. Three plots are generated based on aggregated data, which can be found below. <br>
 
 **Figure 1. Energy Consumption Over Time For Contiguous US**
-![Figure 1.](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/energy_consumption_over_time.png "Figure 1.")
+![Figure 1.](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plot_output/energy_consumption_over_time.png "Figure 1.")
 <br>
 
 **Figure 2. Degree Days Over Time For Contiguous US**
-![Figure 2.](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/degree_days_over_time.png "Figure 2.")
+![Figure 2.](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plot_output/degree_days_over_time.png "Figure 2.")
 <br>
 
 **Figure 3. Monthly Energy Consumption for Contiguous US vs. Degree Days**
-![Figure 3.](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/consumption_vs_ddays.png "Figure 3.")
+![Figure 3.](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plot_output/consumption_vs_ddays.png "Figure 3.")
 <br>
 
 These three figures provide a general visualization for our data. **Figure 1** contains the monthly electrical, natural gas, and total energy consumption for the Contiguous United States. From **Figure 1**, we can observe that natural gas consumption (demand) has increased over time, with consumption seeming to increase at a greater rate after 2012. Please note, this is simply and observation, and reasons behind this increase would have to be analyzed further. Peaks in natural gas consumption and electricity consumption appear to offset each other. This is because natural gas demand primarly peaks in the winter months when gas demand increases for heating purposes. Conversely, electricity demand peaks in the summer, which may be to be due to electrical consumption for cooling purposes such as air conditioning.
