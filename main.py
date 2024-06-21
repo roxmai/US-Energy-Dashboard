@@ -112,7 +112,7 @@ def main():
                         continue
 
                     df_season = df_years[df_years.index.get_level_values('Month').isin(month_map[season])]
-                    if df_season.empty():
+                    if df_season.empty:
                         print('No data available for the selected season. Please enter a valid season.')
                         continue
 
