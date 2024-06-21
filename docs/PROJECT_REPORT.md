@@ -217,13 +217,13 @@ Deeper analysis into energy consumption can be completed but is not within the s
 #### User Input Generated Plots
 Our tool generates three plots based on user input. These plots are generated based on user input, and are generated automatically for a specificed region, with data points appearing on seasonal or monthly time-series based on user input. This allows the tool user to visualize their data for a specific region, over time. Please refer to the following three figures, which provides an example of the output when the user specifies the region to be "New England", and on a "season" basis. Note, this is why the data points do not line up perfectly with the year. 
 
-![Absolute Degree Days - New England](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/absolute_degree_days.png "Absolute Degree Days")
+![Absolute Degree Days - New England](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plot_output/absolute_degree_days.png "Absolute Degree Days")
 <br>
 
-![Natural Gas Consumption - New England](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/natural_gas_consumption.png "Natural Gas Consumption")
+![Natural Gas Consumption - New England](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plot_output/natural_gas_consumption.png "Natural Gas Consumption")
 <br>
 
-![Electrical Consumption - New England](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/electrical_consumption.png "Electrical Consumption")
+![Electrical Consumption - New England](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plot_output/electrical_consumption.png "Electrical Consumption")
 <br>
 
 
