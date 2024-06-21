@@ -190,15 +190,52 @@ print(seasonal_averages)
 After the general analytics are generated, the input/output portion of the Main.py file is executed.
 
 ### Data Visualization and Plots
-TODO: Add verbiage on this data
+#### General Visualizations
+To visualize the data, several plots are generated. Three plots are generated based on aggregated data, which can be found below. <br>
 
-### Future Analytics
+**Figure 1. Energy Consumption Over Time For Contiguous US**
+![Figure 1.](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/energy_consumption_over_time.png "Figure 1.")
+<br>
 
-As mentioned previously in the Introduction - Analytics section of this report, further analytics can be completed, but were not done in this implementation. <br>
+**Figure 2. Degree Days Over Time For Contiguous US**
+![Figure 2.](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/degree_days_over_time.png "Figure 2.")
+<br>
+
+**Figure 3. Monthly Energy Consumption for Contiguous US vs. Degree Days**
+![Figure 3.](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/consumption_vs_ddays.png "Figure 3.")
+<br>
+
+These three figures provide a general visualization for our data. **Figure 1** contains the monthly electrical, natural gas, and total energy consumption for the Contiguous United States. From **Figure 1**, we can observe that natural gas consumption (demand) has increased over time, with consumption seeming to increase at a greater rate after 2012. Please note, this is simply and observation, and reasons behind this increase would have to be analyzed further. Peaks in natural gas consumption and electricity consumption appear to offset each other. This is because natural gas demand primarly peaks in the winter months when gas demand increases for heating purposes. Conversely, electricity demand peaks in the summer, which may be to be due to electrical consumption for cooling purposes such as air conditioning.
+<br>
+
+Deeper analysis into energy consumption can be completed but is not within the scope of this tool and would require more granular datasets, which can be obtained from EIA. <br>
+
+**Figure 2** contains a monthly time-series visualization of Degree Days. To understand this figure, the definition of 'degree days' must be understood, which is explained in the section explaining Data Sources (Weather - Degree Day). The data retrieved from the EIA contains weather data around a base 65°F. For our visualization, this means that any positive value, represents degree days over 65°F, and any degree days below base 65°F. This is needed to be done to better visualize weather because the values for Cooling Degree Days and Heating Degree Days both come in as positive values. Looking at the figure, we can see that it oscillates, which is expected due to the cyclical nature of weather. In fact, there seems to be an inflection point indicating the warming and cooling of the seasons. <br>
+
+**Figure 3** visualizes Degree Days on the x-axis, and Total Energy Consumption on the y-axis. To generate this graph, energy consumption is grouped by month. This visualization allows the user to understand the relationship between degree days and total energy consumption. Based on the data, we find that there are more data points in the positive portion of the x-axis. This makes sense, as summer appears to be the only time of the year where degree days are negative, indicating that the daily average temperature is below 65°F only in the summer.
+
+#### User Input Generated Plots
+Our tool generates three plots based on user input. These plots are generated based on user input, and are generated automatically for a specificed region, with data points appearing on seasonal or monthly time-series based on user input. This allows the tool user to visualize their data for a specific region, over time. Please refer to the following three figures, which provides an example of the output when the user specifies the region to be "New England", and on a "season" basis. Note, this is why the data points do not line up perfectly with the year. 
+
+![Absolute Degree Days - New England](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/absolute_degree_days.png "Absolute Degree Days")
+<br>
+
+![Natural Gas Consumption - New England](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/natural_gas_consumption.png "Natural Gas Consumption")
+<br>
+
+![Electrical Consumption - New England](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/plots/electrical_consumption.png "Electrical Consumption")
+<br>
+
+
+## FUTURE ANALYTICS
+
+As mentioned previously in the Introduction - Analytics section of this report, further analytics can be completed, but were not done in this implementation. With more resources, the scope of the tool could be expanded. <br>
 
 One very useful application would be to complete a seasonal time series analysis on a training set of the data. This regression could be done on the entire Contiguous United States. However, the best use case for this would be to create models for each 'State' or 'Region'. This model would ideally be trained on day of the year, and degree day. This would allow for us to implement the model and feed it with a weather forecast for days ahead to generate a forecasted demand for each region or state. <br>
 
-More functionality could also be added to the tool in order to create comparisons between the demand profile of different states. Also, demand from other sources of energy could be integrated into this model in order to create a more robust and inclusive analytics tool for energy demand in the Contiguous United States.
+More functionality could also be added to the tool in order to create comparisons between the demand profile of different states. Also, demand from other sources of energy could be integrated into this model in order to create a more robust and inclusive analytics tool for energy demand in the Contiguous United States. <br>
+
+In the end, a dashboard could be generated, producing many different displays for different visualizations of this data so that the enduser would better understand the natural gas and electricity demand markets for the Contiguous United States.
 
 
 
