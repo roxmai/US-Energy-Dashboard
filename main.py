@@ -38,6 +38,8 @@ def main():
 
                 if time_frame == 'yearly':
                     year = int(input("Enter the year you want to analyze from 2001 to 2024 (e.g. 2003): "))
+                    if year < 2001 or year > 2024:
+                        raise ValueError('Year must be between 2001 and 2024.')
                     df_year = df_region[df_region.index.get_level_values('Year') == year]
                     if df_year.empty:
                         print('No data available for the selected year. Please enter a valid year.')
