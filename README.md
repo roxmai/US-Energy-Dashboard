@@ -217,7 +217,7 @@ Please review [Official Documentation for venv - virtual environments](https://d
     - This command will activate your Virtual Environment - you should see it activated in your terminal. If you do not see your '(.venv)' as active in your terminal, you may have to try again
     - You should do this everytime you make a new branch to update your .venv Virtual Environment to the latest version of requirements.txt
 
-    ![screenshot1](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/screenshot_1_venv.png "Activate .venv")
+    ![screenshot1](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/screenshots/screenshot_1_venv.png "Activate .venv")
     
     ```terminal
     
