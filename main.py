@@ -69,7 +69,13 @@ def main():
 
             elif time_frame == 'monthly':
                 year_start = int(input("Enter the start year you want to analyze from 2001 to 2024 (e.g. 2003): "))
+                if year_start < 2001 or year_start > 2024:
+                    print('Start year must be between 2001 and 2024.')
+                    continue
                 year_end = int(input("Enter the end year you want to analyze from 2001 to 2024 (e.g. 2003): "))
+                if year_end < 2001 or year_end > 2024:
+                    print('End year must be between 2001 and 2024.')
+                    continue
                 df_years = df_region[(df_region.index.get_level_values('Year') >= year_start) & (df_region.index.get_level_values('Year') <= year_end)]
                 if df_years.empty:
                     print('No data available for the selected years. Please enter a valid range.')
@@ -92,7 +98,7 @@ def main():
                     print(f"\nFor the region {region_input} from year {year_start} to {year_end}, month {month}:")
                     print(f"Average monthly power consumption: {average_power:.2f} million kWh")
                     print(f"Average monthly natural gas consumption: {average_natural_gas:.2f} million kWh")
-                    print(f"Average monthly energy consumption: { average_energy:.2f } million kWh ")
+                    print(f"Average monthly energy consumption: {average_energy:.2f} million kWh ")
 
                     # Plot energy consumption vs degree days (Scatter Plot for 'monthly')
                     plot_energy_consumption(df_month, plot_type='scatter')
