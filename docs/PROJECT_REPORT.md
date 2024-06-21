@@ -237,5 +237,9 @@ More functionality could also be added to the tool in order to create comparison
 
 In the end, a dashboard could be generated, producing many different displays for different visualizations of this data so that the enduser would better understand the natural gas and electricity demand markets for the Contiguous United States.
 
+## EXECUTION SAMPLES
 
+![screenshot_6_generalstatistics.png](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/screenshots/screenshot_6_generalstatistics.png "General Statistics")
+![screenshot_7_yearlystatistics.png](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/screenshots/screenshot_7_yearlystatistics.png "Yearly Statistics With Input Errors")
+![screenshot_8_monthlystatistics.png](https://github.com/ENSF-692-Spring-2024/ensf-692-project-the-cool-company/blob/main/screenshots/screenshot_8_monthlystatistics.png "Monthly Statistics With Input Errors")
 
