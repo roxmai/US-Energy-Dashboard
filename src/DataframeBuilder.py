@@ -4,6 +4,10 @@ import regex
 from datetime import datetime as date
 
 def build_data_frame():
+    '''
+    Builds the master dataframe required for the energy consumption analysis tool
+    ''' 
+
     regions_dict = {'Connecticut':'New England', 'Maine':'New England', 'Massachusetts':'New England', 'New Hampshire':'New England', 'Rhode Island':'New England', 'Vermont':'New England',
     'New Jersey':'Middle Atlantic', 'New York':'Middle Atlantic', 'Pennsylvania':'Middle Atlantic',
     'Indiana':'East North Central', 'Illinois':'East North Central', 'Michigan':'East North Central', 'Ohio':'East North Central', 'Wisconsin':'East North Central', 

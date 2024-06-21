@@ -6,8 +6,21 @@ import os
 # New function adding features
 
 def analyze_data(df):
+    '''
+    Generates and prints summarized analytics for the energy consumption analytics tool
+
+    Parameters
+    ----------
+    df : pd.DataFrame
+
+    Returns
+    -------
+    df : pd.DataFrame
+    ''' 
+
     output_dir = 'plot_output'
     os.makedirs(output_dir, exist_ok=True)
+    print('******** Summarized Statistics using pd.describe() for Master Dataframe ********')
     print(df.describe())
 
     # Adding Total Energy Consumption, Natural Gas Energy Consumption, and Electrical/Natural Gas Ratio column
@@ -15,6 +28,8 @@ def analyze_data(df):
     df['Natural Gas Energy Consumption (million kWh)'] = df['Natural Gas Consumption (MMcf)']*NATURAL_GAS_ENERGY_DENSITY 
     df['Total Energy Consumption (million kWh)'] = df['Natural Gas Energy Consumption (million kWh)']+df['Electrical Consumption (million kWh)']
     df['Electrical/Natural Gas Consumption Ratio'] = df['Electrical Consumption (million kWh)'] / df['Natural Gas Energy Consumption (million kWh)']
+    print('\n'*2)
+    print('******** Master Dataframe with Total Energy Consumption (million kWh) ********')
     print(df)
 
     # ******

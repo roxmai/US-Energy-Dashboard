@@ -9,18 +9,7 @@
 This tool's intended use is to summarize statistics for Continental US Natural Gas and Electrical Power consumption. Data is organized in a monthly time series and can be summarized by state or region.
 
 **How to use:**
-Insert description on how to use tool later
-
-**Data sources:**
-
-Electricity consumption by state, sector: "https://www.eia.gov/electricity/data/browser/#/topic/5?agg=0,1&geo=vvvvvvvvvvvvo&linechart=ELEC.SALES.TX-ALL.M~ELEC.SALES.TX-RES.M~ELEC.SALES.TX-COM.M~ELEC.SALES.TX-IND.M&columnchart=ELEC.SALES.TX-ALL.M~ELEC.SALES.TX-RES.M~ELEC.SALES.TX-COM.M~ELEC.SALES.TX-IND.M&map=ELEC.SALES.US-ALL.M&freq=M&start=200101&end=202403&ctype=linechart&ltype=pin&rtype=s&maptype=0&rse=0&pin=&endsec=vg"
-
-Natural gas consumption: "https://www.eia.gov/dnav/ng/ng_cons_sum_a_EPG0_vgt_mmcf_m.htm"
-
-Degree Day information and why it is used: "https://www.eia.gov/energyexplained/units-and-calculators/degree-days.php"
-HDD: "https://www.eia.gov/totalenergy/data/browser/index.php?tbl=T01.10#/?f=M&start=197301&end=202402&charted=32-10"
-CDD: "https://www.eia.gov/totalenergy/data/browser/index.php?tbl=T01.11#/?f=M&start=197301&end=202402&charted=32-10"
-
+To use the tool, ensure all requirements are installed into your python environment. If needed, follow the instructions below to create a virtual environment and install the required modules listed in requirements.txt. To execute, run the main.py file. Please note, that any incorrect user inputs will throw an error to the user, and terminate the program. 
 
 
 ### Roadmap
